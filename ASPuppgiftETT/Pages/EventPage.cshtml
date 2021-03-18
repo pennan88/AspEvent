@@ -1,0 +1,31 @@
+﻿@page
+@model ASPuppgiftETT.Pages.EventPageModel
+
+@{
+    ViewData["Title"] = "EventPage";
+}
+
+<h1>EventPage</h1>
+
+<p>
+    <a asp-page="./Options/CreateEvent">Create New</a>
+</p>
+
+    @foreach (var item in Model.Event)
+    {
+        <div class="card justify-content-center" style="width: 18rem;">
+            <img src="/images/summerburst.png" class="card-img-top" alt="" />
+            <div class="card-body">
+                <h5>Title: @Html.DisplayFor(modelItem => item.Title)</h5>
+                <p>OrganizerId: @Html.DisplayFor(modelItem => item.OrganizerId)</p>
+                <p>Description: @Html.DisplayFor(modelItem => item.Description)</p>
+                <p>Location: @Html.DisplayFor(modelItem => item.Location)</p>
+                <p>Adress: @Html.DisplayFor(modelItem => item.Adress)</p>
+                <p>Date: @Html.DisplayFor(modelItem => item.Date)</p>
+                <p>Tickets_left: @Html.DisplayFor(modelItem => item.Tickets_left)</p>
+
+                <a href="#" class="btn btn-primary">Join Event</a>
+            </div>
+        </div>
+    }
+
