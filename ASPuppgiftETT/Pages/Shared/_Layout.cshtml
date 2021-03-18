@@ -10,17 +10,28 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <ul class="navbar-nav flex-grow-1 justify-content-around">
-                        <li class="nav-item  ">
-                            <a class="btn btn-outline-primary " asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-success" asp-area="" asp-page="/EventPage">Events</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="container d-sm-inline-flex">
+                <ul class="navbar-nav flex-grow-1 justify-content-start">
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-primary " asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-success" asp-area="" asp-page="/EventPage">Upcoming Events</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-success" asp-area="" asp-page="">My Events</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container d-sm-inline-flex border-1">
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-primary" asp-area="" asp-page="">Login</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-primary" asp-area="" asp-page="">Register</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>

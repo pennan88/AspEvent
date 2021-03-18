@@ -25,7 +25,9 @@ namespace ASPuppgiftETT
 
                 var Events = new Models.Event[]
                 {
-                    new Models.Event{Title="Summerburst", Adress="Göteborg", Tickets_left="100", Description="Party", Location="Ullevi"}
+                    new Models.Event{Title="Summerburst", Adress="Göteborg", Tickets_left="100", Description="Party", Location="Ullevi"},
+                    new Models.Event{Title="Super Festival 2021", Adress="Stockholm", Tickets_left="100", Description="Biggest Party ever", Location="Globen"},
+                    new Models.Event{Title="TrashFest21", Adress="TrashLand", Tickets_left="100", Description="Trash Party", Location="Trash Street"}
                 };
                 context.Event.AddRange(Events);
                 context.SaveChanges();
