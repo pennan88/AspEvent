@@ -14,23 +14,13 @@ namespace ASPuppgiftETT
     {
         public static void Main(string[] args)
         {
-           var host = CreateHostBuilder(args).Build();
+            var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<Data.ASPuppgiftETTContext>();
 
-
-                context.RemoveRange(context.Event);
-
-                var Events = new Models.Event[]
-                {
-                    new Models.Event{Title="Summerburst", Adress="Göteborg", Tickets_left="100", Description="Party", Location="Ullevi"},
-                    new Models.Event{Title="Super Festival 2021", Adress="Stockholm", Tickets_left="100", Description="Biggest Party ever", Location="Globen"},
-                    new Models.Event{Title="TrashFest21", Adress="TrashLand", Tickets_left="100", Description="Trash Party", Location="Trash Street"}
-                };
-                context.Event.AddRange(Events);
-                context.SaveChanges();
+                context.Seed();
             }
 
             host.Run();

@@ -20,7 +20,7 @@
                 <img src="/images/summerburst.png" class="card-img-top" alt="" />
                 <div class="card-body d-flex flex-column">
                     <h5 class="text-center">@Html.DisplayFor(modelItem => item.Title)</h5>
-                    <p>OrganizerId: @Html.DisplayFor(modelItem => item.OrganizerId)</p>
+                    <p>OrganizerId: @Html.DisplayFor(modelItem => item.Organizer.Id)</p>
                     <p>Description: @Html.DisplayFor(modelItem => item.Description)</p>
                     <p>Location: @Html.DisplayFor(modelItem => item.Location)</p>
                     <p>Adress: @Html.DisplayFor(modelItem => item.Adress)</p>
