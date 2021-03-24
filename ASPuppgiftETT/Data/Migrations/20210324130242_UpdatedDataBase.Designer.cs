@@ -4,14 +4,16 @@ using ASPuppgiftETT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASPuppgiftETT.Data.Migrations
 {
     [DbContext(typeof(ASPuppgiftETTContext))]
-    partial class ASPuppgiftETTContextModelSnapshot : ModelSnapshot
+    [Migration("20210324130242_UpdatedDataBase")]
+    partial class UpdatedDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

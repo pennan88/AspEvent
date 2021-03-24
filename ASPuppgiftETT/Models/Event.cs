@@ -15,6 +15,6 @@ namespace ASPuppgiftETT.Models
         public DateTime Date { get; set; }
         public string Tickets_left { get; set; }
         public Organizer Organizer { get; set; }
-        public List<Attendee> Attendees { get; set; }
+        public List<Attendee> Attendee { get; set; }
     }
 }
