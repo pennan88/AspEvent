@@ -23,14 +23,14 @@ namespace ASPuppgiftETT.Pages
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if ( id == null )
             {
                 return NotFound();
             }
 
-            Event = await _context.Event.FirstOrDefaultAsync(m => m.Id == id);
+            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Event == null)
+            if ( Event == null )
             {
                 return NotFound();
             }

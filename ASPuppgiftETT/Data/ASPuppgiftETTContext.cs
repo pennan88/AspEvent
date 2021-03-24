@@ -44,9 +44,9 @@ namespace ASPuppgiftETT.Data
 
             var Organizer = new Organizer[]
             {
-                new Organizer{Name = "organizer", Email = "Email@mail.com", Phone_number = "0755346788"},
-                new Organizer{Name = "organizer2", Email = "2Email@mail.com", Phone_number = "0755346788"},
-                new Organizer{Name = "organizer3", Email = "3Email@mail.com", Phone_number = "0755346788"},
+                new Organizer{Name = "SummerOrganizer", Email = "Summerburste@mail.com", Phone_number = "0755346788"},
+                new Organizer{Name = "SuperOrganizer", Email = "Super@mail.com", Phone_number = "0755346788"},
+                new Organizer{Name = "TrashMan", Email = "Trash@mail.com", Phone_number = "0755346788"},
 
             };
 
