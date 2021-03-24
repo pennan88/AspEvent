@@ -32,11 +32,9 @@ namespace ASPuppgiftETT.Data
                 return;
             }
 
-
-
             var Attendee = new Attendee[]
             {
-                    new Attendee{Name = "Alex", Email = "mail@mail.com", Phone_number = "076654733" },
+                    new Attendee{Name = "Alex", Email = "mail@mail.com", Phone_number = "076654733"},
                     new Attendee{Name = "Sven", Email = "mai2l@mail.com", Phone_number = "076651733"},
                     new Attendee{Name = "Göran", Email = "mail3@mail.com", Phone_number = "076624733"},
                     new Attendee{Name = "Torsten", Email = "ma4il@mail.com", Phone_number = "076654733"},

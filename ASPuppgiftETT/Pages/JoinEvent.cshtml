@@ -8,7 +8,7 @@
 <div class="container">
     <h1 class="text-center">EventName</h1>
     <div class="container d-flex justify-content-center">
-        <div class="card mx-2" style="width: 30rem;">
+        <div class="card mx-2" style="width: 32rem;">
             <img src="/images/summerburst.png" class="card-img-top" alt="" />
             <div class="d-flex flex-row justify-content-sm-between">
                 <div class="container-fluid">
@@ -31,7 +31,7 @@
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.Event.Location)
                         </dd>
-                        <dt class="col-sm-6"
+                        <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.Event.Adress)
                         </dt>
                         <dd class="col-sm-10">
@@ -53,23 +53,29 @@
                 </div>
                 <div class="container-fluid">
                     <dl class="row align-content-center">
-                        <dt class="col-sm-6">
+                        <dt class="col-sm-11">
                             @Html.DisplayNameFor(model => model.Event.Organizer.Name)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-11">
                             @Html.DisplayFor(model => model.Event.Organizer.Name)
                         </dd>
-                        <dt class="col-sm-6">
+                        <dt class="col-sm-11">
                             @Html.DisplayNameFor(model => model.Event.Organizer.Email)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-11">
                             @Html.DisplayFor(model => model.Event.Organizer.Email)
                         </dd>
-                        <dt class="col-sm-10">
+                        <dt class="col-sm-11">
                             @Html.DisplayNameFor(model => model.Event.Organizer.Phone_number)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-11">
                             @Html.DisplayFor(model => model.Event.Organizer.Phone_number)
+                        </dd>
+                        <dt class="col-sm-11">
+                            @Html.DisplayNameFor(model => model.Event.Organizer.Id)
+                        </dt>
+                        <dd class="col-sm-11">
+                            @Html.DisplayFor(model => model.Event.Organizer.Id)
                         </dd>
                     </dl>
                 </div>
