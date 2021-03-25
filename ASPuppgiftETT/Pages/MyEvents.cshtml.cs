@@ -12,15 +12,14 @@ namespace ASPuppgiftETT.Pages
 {
     public class MyEventsModel : PageModel
     {
-        private readonly ASPuppgiftETT.Data.ASPuppgiftETTContext _context;
+        private readonly ASPuppgiftETTContext _context;
 
-        public MyEventsModel(ASPuppgiftETT.Data.ASPuppgiftETTContext context)
+        public MyEventsModel(ASPuppgiftETTContext context)
         {
             _context = context;
         }
 
         public IList<Event> Event { get; set; }
-
 
         public async Task OnGetAsync()
         {
