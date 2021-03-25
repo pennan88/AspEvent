@@ -21,19 +21,27 @@ namespace ASPuppgiftETT.Pages
 
         public Event Event { get; set; }
 
-
-
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync();
-            return Page();
-        }
-
         [BindProperty]
         public Event MyEvent { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if ( id == null )
+            {
+                return NotFound();
+            }
+
+            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync(m => m.Id == id);
+
+            if ( Event == null )
+            {
+                return NotFound();
+            }
+            return Page();
+        }
+
+        public async Task OnPostAsync()
         {
             MyEvent.Date = DateTime.Now;
             MyEvent.Organizer = await _context.Organizer.FirstOrDefaultAsync();
@@ -41,9 +49,7 @@ namespace ASPuppgiftETT.Pages
             await _context.AddAsync(MyEvent);
             await _context.SaveChangesAsync();
 
-            Event = await _context.Event.FirstOrDefaultAsync();
-
-            return RedirectToPage("EventPage");
+            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync();
         }
     }
 }

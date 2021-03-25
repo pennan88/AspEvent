@@ -75,8 +75,14 @@
                 </div>
             </div>
 
-            <form method="post">
-                <input asp-for="MyEvent.Title" class="m-2 btn btn-outline-success align-self-center" type="submit" value="Join Event" />
+            <!--
+            <div class="d-flex flex-row justify-content-center">
+                <a class="m-2 btn btn-outline-success align-self-center">Join event</a>
+                <a class="m-2 btn btn-outline-danger align-self-center">Return</a>
+            </div>
+                -->
+            <form method="post" action="">
+                <input asp-for="MyEvent.Title" class="m-2 btn btn-outline-success align-self-center" type="submit" value="Join event" />
             </form>
 
         </div>
