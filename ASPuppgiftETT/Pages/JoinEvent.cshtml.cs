@@ -41,7 +41,7 @@ namespace ASPuppgiftETT.Pages
             return Page();
         }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             MyEvent.Date = DateTime.Now;
             MyEvent.Organizer = await _context.Organizer.FirstOrDefaultAsync();
@@ -49,7 +49,9 @@ namespace ASPuppgiftETT.Pages
             await _context.AddAsync(MyEvent);
             await _context.SaveChangesAsync();
 
-            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync();
+            Event = await _context.Event.FirstOrDefaultAsync();
+
+            return RedirectToPage("EventPage");
         }
     }
 }
