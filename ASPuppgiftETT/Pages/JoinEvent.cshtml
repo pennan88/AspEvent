@@ -51,8 +51,8 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="container-fluid">
-                    <dl class="row align-content-center">
+                <div class="container-fluid text-end">
+                    <dl class="d-flex flex-column justify-content-end align-content-end">
                         <dt class="col-sm-11">
                             @Html.DisplayNameFor(model => model.Event.Organizer.Name)
                         </dt>
@@ -71,116 +71,20 @@
                         <dd class="col-sm-11">
                             @Html.DisplayFor(model => model.Event.Organizer.Phone_number)
                         </dd>
-                        <dt class="col-sm-11">
-                            @Html.DisplayNameFor(model => model.Event.Organizer.Id)
-                        </dt>
-                        <dd class="col-sm-11">
-                            @Html.DisplayFor(model => model.Event.Organizer.Id)
-                        </dd>
                     </dl>
                 </div>
             </div>
 
-
+            <!--
             <div class="d-flex flex-row justify-content-center">
-                <a class="mx-4 btn btn-outline-success align-self-center">Join event</a>
-                <a class="mx-4 btn btn-outline-danger align-self-center">Return</a>
+                <a class="m-2 btn btn-outline-success align-self-center">Join event</a>
+                <a class="m-2 btn btn-outline-danger align-self-center">Return</a>
             </div>
+                -->
+            <form method="post" action="">
+                <input asp-for="MyEvent.Title" class="m-2 btn btn-outline-success align-self-center" type="submit" value="Join event" />
+            </form>
 
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<div class="container">
-    <h1 class="text-center">Upcoming Events</h1>
-
-    <p>
-        <a class="btn btn-success" asp-page="./Options/CreateEvent">Create New</a>
-    </p>
-
-    <div class="container d-flex justify-content-center">
-        @@foreach ( var item in Model.Event )
-        {
-            <div class="card mx-2" style="width: 18rem;">
-                <img src="/images/summerburst.png" class="card-img-top" alt="" />
-                <div class="card-body d-flex flex-column">
-                    <h5 class="text-center">@@Html.DisplayFor(modelItem => item.Title)</h5>
-                    <p>OrganizerId: @@Html.DisplayFor(modelItem => item.Organizer.Id)</p>
-                    <p>Description: @@Html.DisplayFor(modelItem => item.Description)</p>
-                    <p>Location: @@Html.DisplayFor(modelItem => item.Location)</p>
-                    <p>Adress: @@Html.DisplayFor(modelItem => item.Adress)</p>
-                    <p>Date: @@Html.DisplayFor(modelItem => item.Date)</p>
-                    <p>Tickets_left: @@Html.DisplayFor(modelItem => item.Tickets_left)</p>
-
-                    <a class="btn btn-outline-success" asp-route-id="@@item.Id" asp-area="" asp-page="MyEvents">Join</a>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-
-
--->
-<!--
-
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Location)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Location)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Adress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Adress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Date)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Tickets_left)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Tickets_left)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Event.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
-    -->

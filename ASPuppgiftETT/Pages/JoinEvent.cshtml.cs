@@ -12,14 +12,18 @@ namespace ASPuppgiftETT.Pages
 {
     public class JoinEventModel : PageModel
     {
-        private readonly ASPuppgiftETT.Data.ASPuppgiftETTContext _context;
+        private readonly ASPuppgiftETTContext _context;
 
-        public JoinEventModel(ASPuppgiftETT.Data.ASPuppgiftETTContext context)
+        public JoinEventModel(ASPuppgiftETTContext context)
         {
             _context = context;
         }
 
         public Event Event { get; set; }
+
+        [BindProperty]
+        public Event MyEvent { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,6 +39,17 @@ namespace ASPuppgiftETT.Pages
                 return NotFound();
             }
             return Page();
+        }
+
+        public async Task OnPostAsync()
+        {
+            MyEvent.Date = DateTime.Now;
+            MyEvent.Organizer = await _context.Organizer.FirstOrDefaultAsync();
+
+            await _context.AddAsync(MyEvent);
+            await _context.SaveChangesAsync();
+
+            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync();
         }
     }
 }

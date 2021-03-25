@@ -10,11 +10,11 @@ using ASPuppgiftETT.Models;
 
 namespace ASPuppgiftETT.Pages
 {
-    public class EventPageModel : PageModel
+    public class MyEventsModel : PageModel
     {
-        private readonly ASPuppgiftETTContext _context;
+        private readonly ASPuppgiftETT.Data.ASPuppgiftETTContext _context;
 
-        public EventPageModel(ASPuppgiftETTContext context)
+        public MyEventsModel(ASPuppgiftETT.Data.ASPuppgiftETTContext context)
         {
             _context = context;
         }
@@ -24,9 +24,8 @@ namespace ASPuppgiftETT.Pages
 
         public async Task OnGetAsync()
         {
-            Event = await _context.Event
-                .Include(o => o.Organizer)
-                .ToListAsync();
+
+            Event = await _context.Event.Include(o => o.Organizer).ToListAsync();
         }
     }
 }
