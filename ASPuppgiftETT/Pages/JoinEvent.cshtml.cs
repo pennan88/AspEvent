@@ -21,10 +21,6 @@ namespace ASPuppgiftETT.Pages
 
         public Event Event { get; set; }
 
-        [BindProperty]
-        public Event MyEvent { get; set; }
-
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if ( id == null )
@@ -41,17 +37,20 @@ namespace ASPuppgiftETT.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        [BindProperty]
+        public Event MyEvent { get; set; }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            MyEvent.Date = DateTime.Now;
-            MyEvent.Organizer = await _context.Organizer.FirstOrDefaultAsync();
 
-            await _context.AddAsync(MyEvent);
+            var attendee = await _context.Attendee.Where(a => a.Id == 1).Include(e => e.Event).FirstOrDefaultAsync();
+
+            var join = await _context.Event.Where(e => e.Id == id).FirstOrDefaultAsync();
+
+            attendee.Event.Add(join);
             await _context.SaveChangesAsync();
+            return RedirectToPage("/MyEvents");
 
-            Event = await _context.Event.FirstOrDefaultAsync();
-
-            return RedirectToPage("EventPage");
         }
     }
 }

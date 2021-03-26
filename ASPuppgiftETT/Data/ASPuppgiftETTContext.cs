@@ -22,12 +22,10 @@ namespace ASPuppgiftETT.Data
 
         public void Seed()
         {
-            this.Attendee.RemoveRange(this.Attendee);
-            this.Organizer.RemoveRange(this.Organizer);
-            Event.RemoveRange(Event.ToList());
-            SaveChanges();
-            Database.EnsureCreated();
-            if ( Event.Any() )
+            this.Database.EnsureCreated();
+            if ( this.Event.Any() ||
+                this.Attendee.Any() ||
+                this.Organizer.Any() )
             {
                 return;
             }

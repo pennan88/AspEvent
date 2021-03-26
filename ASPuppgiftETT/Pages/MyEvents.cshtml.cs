@@ -12,19 +12,18 @@ namespace ASPuppgiftETT.Pages
 {
     public class MyEventsModel : PageModel
     {
-        private readonly ASPuppgiftETTContext _context;
+        private readonly ASPuppgiftETT.Data.ASPuppgiftETTContext _context;
 
-        public MyEventsModel(ASPuppgiftETTContext context)
+        public MyEventsModel(ASPuppgiftETT.Data.ASPuppgiftETTContext context)
         {
             _context = context;
         }
 
-        public IList<Event> Event { get; set; }
+        public Attendee Attendee { get; set; }
 
         public async Task OnGetAsync()
         {
-
-            Event = await _context.Event.Include(o => o.Organizer).ToListAsync();
+            Attendee = await _context.Attendee.Where(a => a.Id == 1).Include(e => e.Event).FirstOrDefaultAsync();
         }
     }
 }
