@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASPuppgiftETT.Data.Migrations
 {
-    public partial class Firstmigration : Migration
+    public partial class FirstMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace ASPuppgiftETT.Data.Migrations
                 name: "Attendee",
                 columns: table => new
                 {
-                    AttendeeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -19,56 +19,82 @@ namespace ASPuppgiftETT.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendee", x => x.AttendeeId);
+                    table.PrimaryKey("PK_Attendee", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Organizer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone_number = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organizer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Event",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizerId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Tickets_left = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Tickets_left = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrganizerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.EventId);
+                    table.PrimaryKey("PK_Event", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Event_Organizer_OrganizerId",
+                        column: x => x.OrganizerId,
+                        principalTable: "Organizer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AttendeeEvent",
                 columns: table => new
                 {
-                    AttendeesAttendeeId = table.Column<int>(type: "int", nullable: false),
-                    EventsEventId = table.Column<int>(type: "int", nullable: false)
+                    AttendeeId = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttendeeEvent", x => new { x.AttendeesAttendeeId, x.EventsEventId });
+                    table.PrimaryKey("PK_AttendeeEvent", x => new { x.AttendeeId, x.EventId });
                     table.ForeignKey(
-                        name: "FK_AttendeeEvent_Attendee_AttendeesAttendeeId",
-                        column: x => x.AttendeesAttendeeId,
+                        name: "FK_AttendeeEvent_Attendee_AttendeeId",
+                        column: x => x.AttendeeId,
                         principalTable: "Attendee",
-                        principalColumn: "AttendeeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AttendeeEvent_Event_EventsEventId",
-                        column: x => x.EventsEventId,
+                        name: "FK_AttendeeEvent_Event_EventId",
+                        column: x => x.EventId,
                         principalTable: "Event",
-                        principalColumn: "EventId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttendeeEvent_EventsEventId",
+                name: "IX_AttendeeEvent_EventId",
                 table: "AttendeeEvent",
-                column: "EventsEventId");
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Event_OrganizerId",
+                table: "Event",
+                column: "OrganizerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -81,6 +107,9 @@ namespace ASPuppgiftETT.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Event");
+
+            migrationBuilder.DropTable(
+                name: "Organizer");
         }
     }
 }

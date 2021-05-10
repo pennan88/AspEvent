@@ -74,10 +74,23 @@
                     </dl>
                 </div>
             </div>
+            <div>
+                @if (Model.JoinedCheck == false)
+                {
+                    <form method="post">
+                        <input class="m-2 btn btn-outline-success align-self-center" type="submit" value="Join Event" />
+                    </form>
+                    <a class="btn btn-primary" asp-page="./Events">Back to events</a>
+                }
+                else
+                {
+                    <h2>You have joined @Model.Event.Title!</h2>
+                    <a class="btn btn-primary" asp-page="./EventPage">View more events</a>
+                    <a class="btn btn-secondary" asp-page="./MyEvents">View your events</a>
+                }
+            </div>
 
-            <form method="post">
-                <input class="m-2 btn btn-outline-success align-self-center" type="submit" value="Join Event" />
-            </form>
+
 
         </div>
     </div>

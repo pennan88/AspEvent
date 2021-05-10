@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPuppgiftETT.Data.Migrations
 {
     [DbContext(typeof(ASPuppgiftETTContext))]
-    [Migration("20210318092400_Firstmigration")]
-    partial class Firstmigration
+    [Migration("20210510144228_FirstMig")]
+    partial class FirstMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace ASPuppgiftETT.Data.Migrations
 
             modelBuilder.Entity("ASPuppgiftETT.Models.Attendee", b =>
                 {
-                    b.Property<int>("AttendeeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -37,14 +37,14 @@ namespace ASPuppgiftETT.Data.Migrations
                     b.Property<string>("Phone_number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AttendeeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Attendee");
                 });
 
             modelBuilder.Entity("ASPuppgiftETT.Models.Event", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -61,7 +61,7 @@ namespace ASPuppgiftETT.Data.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrganizerId")
+                    b.Property<int?>("OrganizerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tickets_left")
@@ -70,39 +70,76 @@ namespace ASPuppgiftETT.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EventId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizerId");
 
                     b.ToTable("Event");
                 });
 
+            modelBuilder.Entity("ASPuppgiftETT.Models.Organizer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone_number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organizer");
+                });
+
             modelBuilder.Entity("AttendeeEvent", b =>
                 {
-                    b.Property<int>("AttendeesAttendeeId")
+                    b.Property<int>("AttendeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventsEventId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.HasKey("AttendeesAttendeeId", "EventsEventId");
+                    b.HasKey("AttendeeId", "EventId");
 
-                    b.HasIndex("EventsEventId");
+                    b.HasIndex("EventId");
 
                     b.ToTable("AttendeeEvent");
+                });
+
+            modelBuilder.Entity("ASPuppgiftETT.Models.Event", b =>
+                {
+                    b.HasOne("ASPuppgiftETT.Models.Organizer", "Organizer")
+                        .WithMany("Event")
+                        .HasForeignKey("OrganizerId");
+
+                    b.Navigation("Organizer");
                 });
 
             modelBuilder.Entity("AttendeeEvent", b =>
                 {
                     b.HasOne("ASPuppgiftETT.Models.Attendee", null)
                         .WithMany()
-                        .HasForeignKey("AttendeesAttendeeId")
+                        .HasForeignKey("AttendeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ASPuppgiftETT.Models.Event", null)
                         .WithMany()
-                        .HasForeignKey("EventsEventId")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ASPuppgiftETT.Models.Organizer", b =>
+                {
+                    b.Navigation("Event");
                 });
 #pragma warning restore 612, 618
         }

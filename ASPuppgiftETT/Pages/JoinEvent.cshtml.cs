@@ -21,16 +21,22 @@ namespace ASPuppgiftETT.Pages
 
         public Event Event { get; set; }
 
+        public Attendee Attendee { get; set; }
+
+        public bool JoinedCheck { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if ( id == null )
+            if (id == null)
             {
                 return NotFound();
             }
 
-            Event = await _context.Event.Include(o => o.Organizer).FirstOrDefaultAsync(m => m.Id == id);
+            Attendee = await _context.Attendee.FirstOrDefaultAsync();
+            Event = await _context.Event.Include(o => o.Attendee).FirstOrDefaultAsync(m => m.Id == id);
+            JoinedCheck = Event.Attendee.Contains(Attendee);
 
-            if ( Event == null )
+            if (Event == null)
             {
                 return NotFound();
             }
@@ -49,7 +55,7 @@ namespace ASPuppgiftETT.Pages
 
             attendee.Event.Add(join);
             await _context.SaveChangesAsync();
-            return RedirectToPage("/MyEvents");
+            return RedirectToPage(new { id });
 
         }
     }
